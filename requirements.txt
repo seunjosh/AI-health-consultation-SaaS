@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+groq
+fastapi-clerk-auth
+pydantic
