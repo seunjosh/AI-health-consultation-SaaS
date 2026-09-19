@@ -50,9 +50,10 @@ def consultation_summary(
     ]
 
     stream = client.chat.completions.create(
-        model="qwen/qwen3.8-27b",
-        messages=prompt,
-        stream=True,
+    model="openai/gpt-oss-120b",
+    messages=prompt,
+    stream=True,
+)
     )
 
     def event_stream():
