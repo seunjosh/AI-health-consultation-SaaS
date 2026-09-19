@@ -34,12 +34,12 @@ Notes:
 {visit.notes}"""
 
 
-@app.post("/api")
+@app.post("/api/consultation")
 def consultation_summary(
     visit: Visit,
     creds: HTTPAuthorizationCredentials = Depends(clerk_guard),
 ):
-    user_id = creds.decoded["sub"]  # Available for tracking/auditing
+    user_id = creds.decoded["sub"]
     client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
     user_prompt = user_prompt_for(visit)
@@ -50,10 +50,9 @@ def consultation_summary(
     ]
 
     stream = client.chat.completions.create(
-    model="openai/gpt-oss-120b",
-    messages=prompt,
-    stream=True,
-)
+        model="openai/gpt-oss-120b",
+        messages=prompt,
+        stream=True,
     )
 
     def event_stream():
